@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Axios from "axios";
 
 const ButtonComponent = () => {
   const [result, setResult] = useState();
@@ -15,8 +14,9 @@ const ButtonComponent = () => {
     setResult('Chargement...');
     try {
       const key = process.env.REACT_APP_API_KEY;
-      const response = await Axios.get(`https://v6.exchangerate-api.com/v6/${key}/latest/${valueFrom}`);
-      const result = response.data['conversion_rates'][valueTo] * valueNumber;
+      const response = await fetch(`https://v6.exchangerate-api.com/v6/${key}/latest/${valueFrom}`);
+      const data = await response.json();
+      const result = data['conversion_rates'][valueTo] * valueNumber;
       setResult(`${valueNumber} ${valueFrom} = ${result.toFixed(2)} ${valueTo}`);
       document.getElementById('submit').disabled = true;
       setTimeout(() => {
@@ -24,7 +24,7 @@ const ButtonComponent = () => {
       }, 6000);
       let time = 5;
       const interval = setInterval(() => {
-        document.getElementById('submit').value = `Convertir (${time})`;
+      document.getElementById('submit').value = `Convertir (${time})`;
         time--;
       }, 1000);
       setTimeout(() => {
