@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { HiArrowRight } from 'react-icons/hi';
 
 const country_list = {
   AED: "AE",
@@ -181,7 +182,9 @@ const SelectComponent = ({ selected }) => {
           </select>
         </div>
       </div>
-      <div className="icon">&#8646;</div>
+      <div className="icon">
+        <HiArrowRight />
+      </div>
       <div className="to">
         <div className="select-box">
           <img src="https://flagicons.lipis.dev/flags/4x3/us.svg" alt="Pays" className="flag" />
